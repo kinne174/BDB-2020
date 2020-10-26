@@ -4,6 +4,9 @@ private/*
 #data
 data/*
 
+# my load
+file maintenance/load.py
+
 #environment
 .env
 .venv
