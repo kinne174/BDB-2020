@@ -1,8 +1,11 @@
-#my thoughts
+# my thoughts
 private/*
 
-#data
+# data
 data/*
+
+# my models
+models/*
 
 # my load
 maintenance/load.py
