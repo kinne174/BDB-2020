@@ -8,7 +8,10 @@ import matplotlib.animation as animation
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 
-def animate_play(params):
+def animate_play(params={}):
+
+    assert 'gameId' in params, 'GameId must be present to draw!'
+    assert 'playId' in params, 'PlayId must be present to draw!'
 
     gameId = params['gameId']
     playId = params['playId']
@@ -96,10 +99,13 @@ def animate_play(params):
             Offense_positions, Defense_positions, Football_position, field, hash_lines, goal_lines,
             *Position_annotations)
 
-    gif = animation.FuncAnimation(fig, _animate, frames=max(tracking_df['frameId']), interval=50,
+    my_animation = animation.FuncAnimation(fig, _animate, frames=max(tracking_df['frameId']), interval=50,
                                   init_func=_init_animate, blit=True, repeat=True, repeat_delay=50)
 
-    plt.show()
+    if params.get('show'):
+        plt.show()
+    else:
+        return my_animation
 
 def animate_play_fading_tails(params={}):
     global offense_intensity, defense_intensity
@@ -224,5 +230,7 @@ if __name__ == '__main__':
         'gameId': 2018090900,
         'playId': 71,
         'use_positions': True,
+        'show': False,
     }
-    animate_play(params)
+    gif = animate_play(params)
+    plt.show()
